@@ -1,0 +1,14 @@
+{
+  "actions": [
+    {"type":"set_var","enabled":true,"params":{"name":"nome","value":"Mundo"}},
+    {"type":"show_message","enabled":true,"params":{"text":"Iniciando automação para ${nome}"}},
+    {"type":"wait_time","enabled":true,"params":{"ms":"500","random_max_ms":"900"}},
+    {"type":"mouse_move","enabled":true,"params":{"x":"300","y":"300"}},
+    {"type":"mouse_click","enabled":true,"params":{"button":"left"}},
+    {"type":"set_var","enabled":true,"label":"LOOP","params":{"name":"i","value":"1"}},
+    {"type":"calc","enabled":true,"params":{"name":"i","a":"$i","b":"1","op":"+"}},
+    {"type":"if","enabled":true,"params":{"left":"$i","op":"equals","right":"3","then":"FIM","else":"LOOP"}},
+    {"type":"beep","enabled":true,"label":"FIM","params":{}},
+    {"type":"show_notification","enabled":true,"params":{"text":"Fim do script"}}
+  ]
+}
