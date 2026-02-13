@@ -1,0 +1,11 @@
+{
+  "name": "Demo sem admin",
+  "actions": [
+    { "type": "SetVariable", "variableName": "nome", "value": "Mundo" },
+    { "type": "TextOutput", "value": "Olá ${nome}" },
+    { "type": "Calculation", "variableName": "x", "expression": "40+2" },
+    { "type": "TextOutput", "value": "Resultado = ${x}" },
+    { "type": "WaitTime", "waitMs": 500 },
+    { "type": "Beep" }
+  ]
+}
