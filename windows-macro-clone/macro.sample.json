@@ -1,0 +1,13 @@
+{
+  "name": "Demo sem admin",
+  "actions": [
+    { "type": "SetVariable", "variableName": "nome", "value": "Mundo" },
+    { "type": "TextOutput", "value": "Olá ${nome}" },
+    { "type": "Calculation", "variableName": "x", "expression": "40+2*2" },
+    { "type": "TextOutput", "value": "Resultado = ${x}" },
+    { "label": "loop", "type": "WaitTime", "minMs": 200, "maxMs": 400 },
+    { "type": "SetVariable", "variableName": "contador", "value": "3" },
+    { "type": "IfThenElse", "left": "${contador}", "operator": ">", "right": "1", "thenLabel": "fim", "elseLabel": "loop" },
+    { "label": "fim", "type": "Beep" }
+  ]
+}
