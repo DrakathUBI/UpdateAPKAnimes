@@ -1,0 +1,57 @@
+{
+  "name": "macro-completa-windows-no-admin",
+  "compatibility": "v4_v5_unified",
+  "playback_profile": {
+    "speed": 1,
+    "repetitions": 1,
+    "filters": [],
+    "mouse_path_mode": "natural",
+    "post_playback_action": "none",
+    "post_countdown_s": 5
+  },
+  "actions": [
+    { "type": "create_variable", "label": "Inicio", "params": { "name": "counter", "default": "0" } },
+    { "type": "set_variable", "params": { "name": "Query", "value": "anime dublado" } },
+    { "type": "window_focus", "params": { "window": "Notepad" } },
+    { "type": "text_output", "params": { "text": "Busca: ${Query}", "mode": "typing" } },
+    { "type": "hotkey", "params": { "keys": "ENTER" } },
+    { "type": "wait_time", "params": { "minMs": 80, "maxMs": 150 } },
+
+    { "type": "wait_for_pixel_color", "params": { "x": 12, "y": 12, "color": "#ffffff", "timeoutMs": 400, "onTimeout": "goto", "timeoutLabel": "Timeout" } },
+    { "type": "find_text_ocr", "params": { "text": "erro", "regex": false, "outputVar": "ResultText", "timeoutMs": 300 } },
+    { "type": "if_then_else", "params": { "left": "${ResultText}", "operator": "contains", "right": "erro", "thenLabel": "Erro", "elseLabel": "FluxoOK" } },
+    { "type": "goto", "label": "FluxoOK", "params": { "label": "Dados" } },
+
+    { "type": "show_message_box", "label": "Timeout", "params": { "text": "Timeout em ${Query}", "buttons": ["OK", "Cancel"] } },
+    { "type": "goto", "params": { "label": "Fim" } },
+
+    { "type": "beep", "label": "Erro", "params": {} },
+    { "type": "show_notification", "params": { "text": "Falha na busca: ${Query}" } },
+    { "type": "goto", "params": { "label": "Fim" } },
+
+    { "type": "data_list", "label": "Dados", "params": { "name": "marcas", "items": ["A", "B", "C"], "target": "MarcaAtual" } },
+    { "type": "calculation", "params": { "expression": "${counter}+1", "target": "counter" } },
+    { "type": "save_variable", "params": { "name": "MarcaAtual", "destination": "file", "path": "./examples/out.txt", "append": true } },
+
+    { "type": "mouse_move", "params": { "x": 200, "y": 220 } },
+    { "type": "mouse_click", "params": { "button": "left", "x": 200, "y": 220 } },
+    { "type": "mouse_scroll", "params": { "delta": 240 } },
+    { "type": "smart_click", "params": { "image": "download.png", "timeoutMs": 300, "onTimeout": "goto", "timeoutLabel": "FallbackImg" } },
+    { "type": "goto", "params": { "label": "Capturas" } },
+
+    { "type": "find_image", "label": "FallbackImg", "params": { "image": "download.png", "outputVarX": "ImgX", "outputVarY": "ImgY", "timeoutMs": 300 } },
+
+    { "type": "capture_bitmap", "label": "Capturas", "params": { "region": [0, 0, 300, 200], "outputVar": "BmpPath" } },
+    { "type": "capture_text_ocr", "params": { "region": [0, 0, 120, 40], "outputVar": "OCRText" } },
+    { "type": "capture_barcode_qr", "params": { "region": [0, 0, 140, 140], "outputVar": "QRData" } },
+    { "type": "wait_for_file_event", "params": { "path": "./examples/out.txt", "mode": "exists", "timeoutMs": 800 } },
+
+    { "type": "scrape_webpage", "params": { "url": "https://example.com", "regex": "<h1>(.*?)</h1>", "outputVar": "WebTitle" } },
+    { "type": "phrase_insertion", "params": { "phraseId": "assinatura_padrao" } },
+    { "type": "ai_object_search", "params": { "prompt": "green download button", "outputVarX": "AiX", "outputVarY": "AiY" } },
+    { "type": "execute_program", "params": { "program": "notepad.exe", "args": [] } },
+    { "type": "embed_macro", "params": { "file": "./examples/macro_child.json" } },
+
+    { "type": "stop", "label": "Fim", "params": {} }
+  ]
+}
