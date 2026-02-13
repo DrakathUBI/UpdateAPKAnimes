@@ -1,0 +1,6 @@
+{
+  "name": "child",
+  "actions": [
+    { "type": "show_notification", "params": { "text": "Macro filha chamada" } }
+  ]
+}

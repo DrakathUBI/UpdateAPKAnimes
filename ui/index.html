@@ -1,0 +1,70 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Macro Recorder Pro UI</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <div class="app">
+    <header class="topbar glass">
+      <div class="brand">⚡ Macro Recorder <span>All-in-One</span></div>
+      <div class="actions">
+        <button id="btnOpen">Abrir</button>
+        <button id="btnSave">Salvar</button>
+        <button id="btnAdd">+ Ação</button>
+        <button id="btnRun" class="run">▶ Executar</button>
+      </div>
+    </header>
+
+    <nav class="tabs">
+      <button class="tab active">File</button>
+      <button class="tab">Record and Edit</button>
+      <button class="tab">Playback</button>
+      <button class="tab">Help</button>
+      <div class="hint">Windows sem Python/Admin • UI única</div>
+    </nav>
+
+    <main class="layout">
+      <section class="panel list glass">
+        <h3>Script (ações)</h3>
+        <table>
+          <thead><tr><th>#</th><th>Type</th><th>Label</th><th>Comment</th></tr></thead>
+          <tbody id="actionRows"></tbody>
+        </table>
+      </section>
+
+      <section class="panel editor glass">
+        <h3>Editor de ação</h3>
+        <label>Tipo
+          <select id="fType"></select>
+        </label>
+        <label>Label
+          <input id="fLabel" placeholder="Opcional" />
+        </label>
+        <label>Comment
+          <input id="fComment" placeholder="Opcional" />
+        </label>
+        <label>Params (JSON)
+          <textarea id="fParams" rows="10"></textarea>
+        </label>
+        <div class="row">
+          <button id="btnApply">Aplicar</button>
+          <button id="btnDelete">Excluir</button>
+        </div>
+      </section>
+
+      <section class="panel logs glass">
+        <h3>Console / Playback</h3>
+        <label>Start at label
+          <input id="startAt" placeholder="ex: Inicio" />
+        </label>
+        <pre id="logView"></pre>
+      </section>
+    </main>
+  </div>
+
+  <script type="module" src="renderer.js"></script>
+</body>
+</html>
