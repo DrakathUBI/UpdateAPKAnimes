@@ -1,0 +1,14 @@
+{
+  "name": "macro-recorder-no-admin",
+  "version": "2.0.0",
+  "type": "module",
+  "main": "desktop/main.js",
+  "scripts": {
+    "start": "node src/main.js",
+    "desktop": "electron .",
+    "test": "node --test"
+  },
+  "devDependencies": {
+    "electron": "^31.7.7"
+  }
+}
